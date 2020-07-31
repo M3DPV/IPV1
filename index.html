@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title> Informatică pentru viitor </title>
+  <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <nav class="menu">
+    <header> <img src="images/logo.png"> IPV <span>×</span></header>
+    <ol>
+      <li><a href="index.html">Acasă</a></li>
+      <li><a href="Viziune.html">Viziune</a></li>
+      <li>     
+        <a href="Cursuri.html">Cursuri</a>
+        <ol class="sub-menu">
+          <li><a href="Utilizare.html">Utilizare</a></li>
+          <li><a href="C++.html">C++</a></li>
+          <li><a href="Web.html">Web</a></li>
+          <li><a href="Python.html">Python</a></li>
+          <li><a href="C#.html">C#</a></li>
+          <li><a href="Tinkercad.html">TinkerCad</a></li>
+        </ol>
+      </li>
+      <li  >
+        <a href="Rezultate.html">Rezultate</a>
+        <ol class="sub-menu">
+          <li><a href="An2018.html">2018</a></li>
+          <li><a href="An2019.html">2019</a></li>
+          <li><a href="An2020.html">2020</a></li>
+        </ol>
+      </li>
+      <li><a href="Contact.html">Contact</a></li>
+    </ol>
+    <footer><button aria-label="Toggle Menu">Toggle</button></footer>
+  </nav>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script>
+
+    var $els = $('.menu a, .menu header');
+    var count = $els.length;
+    var grouplength = Math.ceil(count / 3);
+    var groupNumber = 0;
+    var i = 1;
+    $('.menu').css('--count', count + '');
+    $els.each(function (j) {
+      if (i > grouplength) {
+        groupNumber++;
+        i = 1;
+      }
+      $(this).attr('data-group', groupNumber);
+      i++;
+    });
+
+    $('.menu footer button').on('click', function (e) {
+      e.preventDefault();
+      $els.each(function (j) {
+        $(this).css('--top', $(this)[0].getBoundingClientRect().top + ($(this).attr('data-group') * -15) - 20);
+        $(this).css('--delay-in', j * .1 + 's');
+        $(this).css('--delay-out', (count - j) * .1 + 's');
+      });
+      $('.menu').toggleClass('closed');
+      e.stopPropagation();
+    });
+
+    setTimeout(function () {
+      $('.menu footer button').click();
+      setTimeout(function () {
+        $('.menu footer button').click();
+      }, (count * 100) + 500);
+    }, 1000);
+
+
+  </script>
+</body>
+
+</html>
